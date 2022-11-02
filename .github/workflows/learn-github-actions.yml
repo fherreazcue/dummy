@@ -38,9 +38,9 @@ jobs:
         run: |
           cat group_vars/vars.yml
 
-      # - name: Install dummy through ansible
-      #   run: ansible-playbook Deploy-dummy.yml
+      - name: Install dummy through ansible
+        run: ansible-playbook Deploy-dummy.yml
 
-      # - name: Check tree
-      #   run: |
-      #     tree /home/runner/work
+      - name: Check tree
+        run: |
+          tree /home/runner/work
