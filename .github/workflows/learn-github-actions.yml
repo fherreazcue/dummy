@@ -8,7 +8,8 @@ jobs:
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
-        os: [ubuntu-20.04,ubuntu-22.04,ubuntu-latest]
+        os: [ubuntu-latest]
+        #os: [ubuntu-20.04,ubuntu-22.04,ubuntu-latest]
     steps:
 
       - name: Checkout
@@ -19,11 +20,11 @@ jobs:
 
       - name: Configure ansible for local install
         run: |
-          sed -i '/^vault_password_file/d' './ansible.cfg'
-          sed -i '/^[ssh_connection]/d' './ansible.cfg'
-          sed -i '/^pipelining = true/d' './ansible.cfg'
-          sed -i 's/^- hosts: [servers]/- hosts: localhost' './Deploy-dummy.yml'
-          sed -i '/- hosts: localhost/a   connection: local' './Deploy-dummy.yml'
+          sed -i '/^vault_password_file/d' ansible.cfg
+          sed -i '/^[ssh_connection]/d' ansible.cfg
+          sed -i '/^pipelining = true/d' ansible.cfg
+          sed -i 's/^- hosts: [servers]/- hosts: localhost/' Deploy-dummy.yml
+          sed -i '/- hosts: localhost/a   connection: local' Deploy-dummy.yml
 
       - name: Install dummy through ansible
         run: ansible-playbook Deploy-dummy.yml --ask-become-pass
