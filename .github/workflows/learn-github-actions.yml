@@ -1,7 +1,8 @@
 name: ansible-install
 run-name: ${{ github.actor }} is testing Ansible install
-on: 
-  workflow_dispatch:
+on:
+  push:
+  #workflow_dispatch:
 jobs:
   install-seek-from-ansible:
     runs-on: ${{matrix.os}}
@@ -13,8 +14,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup ansible
-        run: npm ansible
+      # - name: Setup ansible
+      #   run: npm ansible
 
       - name: Configure ansible for local install
         run: |
