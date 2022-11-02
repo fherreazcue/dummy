@@ -1,13 +1,28 @@
-name: learn-github-actions
-run-name: ${{ github.actor }} is learning GitHub Actions
-on: [push]
+name: ansible-install
+run-name: ${{ github.actor }} is testing Ansible install
+on: 
+  workflow_dispatch:
 jobs:
-  check-bats-version:
-    runs-on: ubuntu-latest
+  install-seek-from-ansible:
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-20.04,ubuntu-22.04,ubuntu-latest]
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '14'
-      - run: npm install -g bats
-      - run: bats -v
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup ansible
+        run: npm ansible
+
+      - name: Configure ansible for local install
+        run: |
+          sed -i '/^vault_password_file/d' './ansible.cfg'
+          sed -i '/^[ssh_connection]/d' './ansible.cfg'
+          sed -i '/^pipelining = true/d' './ansible.cfg'
+          sed -i 's/^- hosts: [servers]/- hosts: localhost' './Deploy-dummy.yml'
+          sed -i '/- hosts: localhost/a   connection: local' './Deploy-dummy.yml'
+
+      - name: Install dummy through ansible
+        run: ansible-playbook Deploy-dummy.yml --ask-become-pass

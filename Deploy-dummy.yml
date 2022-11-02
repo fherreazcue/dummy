@@ -1,0 +1,47 @@
+- hosts: [servers]
+  become: true
+  become_user: '{{user_var}}'
+  vars_files:
+    - group_vars/vars.yml
+    - group_vars/sensitive_vars.yml
+
+  tasks: 
+
+########## Update and install dependencies
+    - name: Update all packages to their latest version
+      become: true
+      become_user: root
+      ansible.builtin.apt:
+        update_cache: yes
+        name: "*"
+        state: latest
+
+    - name: Install a list of packages
+      become: true
+      become_user: root
+      ansible.builtin.apt:
+        pkg:
+        - build-essential
+        - sqlite3
+
+    - name: Make dir
+      shell: bash -lc "{{ item }}"
+      with_items:
+        - mkdir '{{git_dest}}/SEEK'
+
+    - name: Echo something
+      shell: bash -lc "{{ item }}"
+      with_items:
+        - echo something
+      args:
+        chdir: '{{git_dest}}/SEEK'
+
+    - name: Reset connection 
+      meta: reset_connection
+
+    - name: Create dummy file
+      shell: bash -lc "{{ item }}"
+      with_items:
+        - touch 'dummy.txt'
+      args:
+        chdir: '{{git_dest}}/SEEK'
