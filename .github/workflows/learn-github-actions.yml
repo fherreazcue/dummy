@@ -20,15 +20,18 @@ jobs:
 
       - name: Configure ansible for local install
         run: |
-          sed -i '/^vault_password_file/d' ansible.cfg
-          sed -i '/^[ssh_connection]/d' ansible.cfg
-          sed -i '/^pipelining = true/d' ansible.cfg
+          sed -i 's/vault_password_file//' ansible.cfg
+          sed -i 's/[ssh_connection]//' ansible.cfg
+          sed -i 's/pipelining = true//' ansible.cfg
           sed -i 's/^- hosts: [servers]/- hosts: localhost/' Deploy-dummy.yml
           sed -i '/- hosts: localhost/a   connection: local' Deploy-dummy.yml
 
-      - name: Check sed worked
+      - name: Check sed worked in cfg
         run: |
           cat ansible.cfg
+
+      - name: Check sed worked in deploy
+        run: |
           cat Deploy-dummy.yml
 
       - name: Install dummy through ansible
