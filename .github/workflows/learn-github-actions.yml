@@ -21,6 +21,10 @@ jobs:
           sed -i '/pipelining/d' ansible.cfg
           sed -i 's/\- hosts\: \[servers\]/\- hosts\: localhost/g' Deploy-dummy.yml
           sed -i '/\- hosts\: localhost/a \ \ connection\: local' Deploy-dummy.yml
+          sed -i 's/user_var\: francisco/user_var\: runner/' group_vars/vars.yml
+          sed -i 's/git_dest\: \/home\/francisco/git_dest\: \/home\/runner\/work/' group_vars/vars.yml
+          sed -i 's/sql_user\: francisco/sql_user\: mysqluser/' group_vars/vars.yml
+          sed -i '/sql_user\: francisco/a sql_password: mysqlpassword' group_vars/vars.yml
 
       - name: Check sed worked in cfg
         run: |
@@ -30,18 +34,13 @@ jobs:
         run: |
           cat Deploy-dummy.yml
 
-      - name: Configure variables
-        run: |
-          sed -i 's/user_var\: francisco/user_var\: runner/' group_vars/vars.yml
-          sed -i 's/git_dest\: \/home\/francisco/git_dest\: \/home\/runner\/work/' group_vars/vars.yml
-      
       - name: Check sed worked in vars
         run: |
           cat group_vars/vars.yml
 
-      - name: Install dummy through ansible
-        run: ansible-playbook Deploy-dummy.yml
+      # - name: Install dummy through ansible
+      #   run: ansible-playbook Deploy-dummy.yml
 
-      - name: Check tree
-        run: |
-          tree /home/runner/work
+      # - name: Check tree
+      #   run: |
+      #     tree /home/runner/work
