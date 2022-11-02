@@ -36,8 +36,16 @@ jobs:
 
       - name: Configure variables
         run: |
-          echo $USER
-          pwd
+          sed -i 's/user_var\: francisco/user_var\: runner' group_vars/vars.yml
+          sed -i 's/git_dest\: \/home\/francisco/git_dest\: \/home\/runner\/work' group_vars/vars.yml
+      
+      - name: Check sed worked in vars
+        run: |
+          cat group_vars/vars.yml
 
       - name: Install dummy through ansible
         run: ansible-playbook Deploy-dummy.yml
+
+      - name: Check tree
+        run: |
+          tree /home/runner/work
