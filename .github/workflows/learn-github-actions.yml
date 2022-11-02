@@ -26,5 +26,10 @@ jobs:
           sed -i 's/^- hosts: [servers]/- hosts: localhost/' Deploy-dummy.yml
           sed -i '/- hosts: localhost/a   connection: local' Deploy-dummy.yml
 
+      - name: Check sed worked
+        run: |
+          cat ansible.cfg
+          cat Deploy-dummy.yml
+
       - name: Install dummy through ansible
-        run: ansible-playbook Deploy-dummy.yml --ask-become-pass
+        run: ansible-playbook Deploy-dummy.yml
