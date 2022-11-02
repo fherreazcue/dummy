@@ -24,7 +24,7 @@ jobs:
           sed -i '/ssh_connection/d' ansible.cfg
           sed -i '/pipelining/d' ansible.cfg
           sed -i 's/\- hosts\: \[servers\]/\- hosts\: localhost/g' Deploy-dummy.yml
-          sed -i '/\- hosts\: localhost/a   connection\: local' Deploy-dummy.yml
+          sed -i '/\- hosts\: localhost/a \ \ connection\: local' Deploy-dummy.yml
 
       - name: Check sed worked in cfg
         run: |
