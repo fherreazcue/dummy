@@ -36,8 +36,8 @@ jobs:
 
       - name: Configure variables
         run: |
-          sed -i 's/user_var\: francisco/user_var\: runner' group_vars/vars.yml
-          sed -i 's/git_dest\: \/home\/francisco/git_dest\: \/home\/runner\/work' group_vars/vars.yml
+          sed -i 's/user_var\: francisco/user_var\: runner\' group_vars/vars.yml
+          sed -i 's/git_dest\: \/home\/francisco/git_dest\: \/home\/runner\/work\' group_vars/vars.yml
       
       - name: Check sed worked in vars
         run: |
