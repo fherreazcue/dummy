@@ -1,3 +1,3 @@
 FROM alpine:latest
 
-CMD [ "echo", "Hello from container"]
+CMD [ "echo", "Hello from changed container"]
