@@ -17,6 +17,9 @@ jobs:
         id: new_tag
         run: echo "date=test-$(date +%s)" >> $GITHUB_OUTPUT
 
+      - name: Update Dockerfile
+        run: sed '-i|ARG something="from container"|ARG something="from sed"|' Dockerfile
+
       - name: Build the Docker image
         run: docker build -t dummy:test-${{ steps.new_tag.outputs.date }} .
 

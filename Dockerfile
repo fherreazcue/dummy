@@ -1,3 +1,5 @@
 FROM alpine:latest
 
-CMD [ "echo", "Hello from changed container"]
+ARG something="from container"
+
+CMD [ "echo", "Hello ${something}}"]
