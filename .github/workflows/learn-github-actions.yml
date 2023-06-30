@@ -1,7 +1,7 @@
 name: test
 run-name: ${{ github.actor }} is testing an action
 on:
-  push:
+  # push:
   workflow_dispatch:
 
 jobs:
