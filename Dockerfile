@@ -6,4 +6,4 @@ RUN apt-get install -y curl
 ARG something="from container"
 ENV somenv=${something}
 
-CMD [ "bash", "-c", "echo", "Hello ${somenv}"]
+CMD echo "Hello ${somenv}"
