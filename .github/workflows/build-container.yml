@@ -3,6 +3,13 @@ name: Docker image build
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      sed:
+        description: 'Use sed in Dockerfile?'
+        required: true
+        type: boolean
+        default: true
 
 jobs:
   build:
@@ -18,6 +25,7 @@ jobs:
         run: echo "date=test-$(date +%s)" >> $GITHUB_OUTPUT
 
       - name: Update Dockerfile
+        if: ${{ github.event.inputs.sed }}
         run: |
           sed -i "s/ARG something.*/$(grep 'ARG something' docker_vars)/" Dockerfile
 
