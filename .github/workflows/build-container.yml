@@ -1,5 +1,5 @@
 name: Docker image build
-run-name: '"Sed"ing? ${{ github.event.inputs.sed }}'
+run-name: 'Docker image build - ${{ github.event_name }} - "sed"-ing? ${{ github.event.inputs.sed }}'
 
 on:
   push:
@@ -26,7 +26,7 @@ jobs:
         run: echo "date=test-$(date +%s)" >> $GITHUB_OUTPUT
 
       - name: Update Dockerfile
-        if: ${{ github.event.inputs.sed }} == true || github.event_name == 'push'
+        if: github.event.inputs.sed == true || github.event_name == 'push'
         run: |
           sed -i "s/ARG something.*/$(grep 'ARG something' docker_vars)/" Dockerfile
 
