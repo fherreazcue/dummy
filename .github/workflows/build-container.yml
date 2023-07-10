@@ -23,7 +23,7 @@ jobs:
 
 
       - name: Build the Docker image
-        run: docker build -t dummy:test-${{ steps.new_tag.outputs.date }} .
+        run: DOCKER_BUILDKIT=1 docker build -t dummy:test-${{ steps.new_tag.outputs.date }} .
 
       - name: Run image
         run: docker run dummy:test-${{ steps.new_tag.outputs.date }}
