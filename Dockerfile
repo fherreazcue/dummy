@@ -1,11 +1,7 @@
-# syntax=docker/dockerfile:1
-
 FROM ubuntu:latest
 
-RUN <<SysReq
-    apt-get update
-    apt-get install -y curl
-SysReq
+RUN apt-get update
+RUN apt-get install -y curl
 
 ARG something="from container"
 
