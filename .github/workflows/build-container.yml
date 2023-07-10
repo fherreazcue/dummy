@@ -26,7 +26,7 @@ jobs:
         run: echo "date=test-$(date +%s)" >> $GITHUB_OUTPUT
 
       - name: Update Dockerfile
-        if: ${{ github.event.inputs.sed }} == 'true' || github.event_name == 'push'
+        if: github.event.inputs.sed || github.event_name == 'pull'
         run: |
           sed -i "s/ARG something.*/$(grep 'ARG something' docker_vars)/" Dockerfile
 
