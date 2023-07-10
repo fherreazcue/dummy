@@ -1,7 +1,10 @@
 FROM ubuntu:latest
 
-RUN apt-get update
+RUN <<SysReq
+    apt-get update
+    apt-get install -y curl
+SysReq
 
 ARG something="from container"
 
-CMD [ "echo", "Hello ${{something}}"]
+CMD [ "echo", "Hello $something"]
