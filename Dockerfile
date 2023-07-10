@@ -3,7 +3,7 @@ FROM ubuntu:latest
 RUN <<SysReq
     apt-get update
     apt-get install -y curl
-<<SysReq
+SysReq
 
 ARG something="from container"
 ENV somenv=${something}
