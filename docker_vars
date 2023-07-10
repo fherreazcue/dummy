@@ -1,0 +1,2 @@
+ARG something="from vars file"
+ARG second="hehe"

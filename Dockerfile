@@ -1,5 +1,7 @@
-FROM alpine:latest
+FROM ubuntu:latest
+
+RUN apt-get update
 
 ARG something="from container"
 
-CMD [ "echo", "Hello ${something}}"]
+CMD [ "echo", "Hello ${{something}}"]
