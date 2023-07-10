@@ -1,4 +1,5 @@
 name: Docker image build
+run-name: '"Sed"ing? ${{ github.event.inputs.sed }}'
 
 on:
   push:
