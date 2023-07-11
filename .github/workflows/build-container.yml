@@ -48,4 +48,4 @@ jobs:
           echo "docker_so=$docker_so" >> $GITHUB_OUTPUT
           expctd="Hello from vars file"
           actual="$docker_so"
-          if [[$expected == $actual]]; then echo "Passed - Expected and got: $expctd"; else  echo "Expected: $expctd" && echo " But was: $actual" && exit 1; fi
+          if [[$expected = $actual]]; then echo "Passed - Expected and got: $expctd"; else  echo "Expected: $expctd" && echo " But was: $actual" && exit 1; fi
