@@ -46,4 +46,6 @@ jobs:
           docker_so=$(docker run dummy:test-${{ steps.new_tag.outputs.date }})
           echo $docker_so
           echo "docker_so=$docker_so" >> $GITHUB_OUTPUT
-          if test [[$docker_so == "Hello from vars file"]]; then echo "All is well"; else echo "Expected: Hello from vars file" && echo "But was: $docker_so" && exit 1; fi
+          expctd="Hello from vars file"
+          actual="$docker_so"
+          if test [[$expected == $actual]]; then echo "Passed - Expected and got: $expctd"; else  echo "Expected: $expctd" && echo " But was: $actual" && exit 1; fi
