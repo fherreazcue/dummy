@@ -43,5 +43,7 @@ jobs:
       - name: Run image
         id: test
         run: |
+          docker run dummy:test-${{ steps.new_tag.outputs.date }}
           echo "docker_so=$(docker run dummy:test-${{ steps.new_tag.outputs.date }})" >> $GITHUB_OUTPUT
+          if test [[$docker_so != "Hello from vars file"]]; then echo "Expected: Hello from vars file" && echo "But was: $docker_so"; fi
           if test [[${{ steps.test.outputs.docker_so }} != "Hello from vars file"]]; then echo "Expected: Hello from vars file" && echo "But was: ${{ steps.test.outputs.docker_so }}" && exit 1; fi
