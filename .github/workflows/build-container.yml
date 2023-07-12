@@ -43,13 +43,14 @@ jobs:
       - name: Run image
         id: test
         run: |
-          touch file.txt
+          touch file2.txt
           docker_so=$(docker run dummy:test-${{ steps.new_tag.outputs.date }})
           echo $docker_so
           echo "docker_so=$docker_so" >> $GITHUB_OUTPUT
           expected="Hello from vars file"
           actual="$docker_so"
           if [ "$expected" = "$actual" ]; then echo "Passed - Expected and got: $expected"; else  echo "Expected: $expected" && echo " But was: $actual" && status=1; fi
-          if [ -f file2.txt ]; then echo "Passed - file.txt exists"; else "No file file.txt" && status=1; fi
+          if [ -f file.txt ]; then echo "Passed - file.txt exists"; else "No file file.txt" && status=1; fi
+          if [ "4/2" = 4/2 ]; then echo "Passed - Yeah, strings are confusing"; else echo '"4/2" is not the same as 4/2.' && status=1; fi
           exit $status
 
