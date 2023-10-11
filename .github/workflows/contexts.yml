@@ -1,0 +1,26 @@
+name: github_contexts
+run-name: 'github contexts'
+
+on:
+  pull_request_target:
+    branches: [main]
+    types: [closed]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: curl from contexts
+        run: |
+          echo "github.base_ref: ${{ github.base_ref }}"
+          echo "github.head_ref: ${{ github.head_ref }}"
+          echo "github.ref: ${{ github.ref }}"
+          echo "github.ref: ${{ github.ref_name }}"
+          curl https://raw.githubusercontent.com/fherreazcue/dummy/${{ github.head_ref }}/curltest.txt
+          curl https://raw.githubusercontent.com/fherreazcue/dummy/${{ github.head_ref }}/curltest.txt
+          curl https://raw.githubusercontent.com/fherreazcue/dummy/${{ github.ref }}/curltest.txt
+          curl https://raw.githubusercontent.com/fherreazcue/dummy/${{ github.ref_name }}/curltest.txt
