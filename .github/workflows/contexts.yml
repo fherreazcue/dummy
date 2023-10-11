@@ -21,10 +21,18 @@ jobs:
           echo "github.ref: ${{ github.ref }}"
           echo "github.ref_name: ${{ github.ref_name }}"
           curl https://raw.githubusercontent.com/fherreazcue/dummy/${{ github.base_ref }}/curltest.txt --output base_curl.txt
-          cat base_curl.txt
           curl https://raw.githubusercontent.com/fherreazcue/dummy/${{ github.head_ref }}/curltest.txt --output head_curl.txt
-          cat head_curl.txt
           curl https://raw.githubusercontent.com/fherreazcue/dummy/${{ github.ref }}/curltest.txt --output ref_curl.txt
-          cat ref_curl.txt
           curl https://raw.githubusercontent.com/fherreazcue/dummy/${{ github.ref_name }}/curltest.txt --output ref_name_curl.txt
+          echo "github.base_ref:"
+          cat base_curl.txt
+          echo "."
+          echo "github.head_curl:"
+          cat head_curl.txt
+          echo "."
+          echo "github.ref_curl:"
+          cat ref_curl.txt
+          echo "."
+          echo "github.ref_name_curl:"
           cat ref_name_curl.txt
+          echo "."
