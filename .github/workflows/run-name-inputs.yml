@@ -1,9 +1,12 @@
 name: test-names
 run-name: |
   test-names:
-  'versioned'? ${{ github.event.inputs.versioned }} - 
-  'latest'? ${{ github.event.inputs.latest }} - 
-  'custom_tag': ${{ github.event.inputs.custom_tag }} -
+  ${{ github.event.inputs.versioned == 'true' && 'versioned' || '- ' }}
+  ${{ github.event.inputs.latest == 'true' && 'latest ' || '- ' }}
+  ${{ github.event.inputs.custom_tag == '' && '-' || 'github.event.inputs.custom_tag' }}
+
+# the conditionals above work like:
+# $#{#{ condition && value_if_true || value_if_false }}
 
 on:
   workflow_dispatch:
