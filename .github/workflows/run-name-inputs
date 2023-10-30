@@ -1,0 +1,36 @@
+name: test-names
+run-name: |
+  test-names:
+  ${{ github.event.inputs.versioned == 'true' ? 'versioned' : '- ' }}
+  ${{ github.event.inputs.latest == 'true' ? 'latest ' : '- ' }}
+  ${{ github.event.inputs.custom_tag == '' ? '-' : 'github.event.inputs.custom_tag' }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      versioned:
+        description: 'Push with versioned tag?'
+        required: true
+        type: boolean
+        default: true
+      latest:
+        description: 'Push with "latest" tag?'
+        required: true
+        type: boolean
+        default: true
+      custom_tag:
+        description: 'Specify a custom tag to push'
+        required: false
+        type: string
+        default: ""
+
+jobs:
+  build-test-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo inputs
+        id: inouts
+        run: |
+          echo "versioned? ${{ github.event.inputs.versioned }}"
+          echo "latest?    ${{ github.event.inputs.latest }}"
+          echo "custom?    ${{ github.event.inputs.custom_tag }}"

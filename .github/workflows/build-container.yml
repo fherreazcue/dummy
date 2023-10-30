@@ -2,8 +2,8 @@ name: Docker image build
 run-name: 'Docker image build - ${{ github.event_name }} - "sed"-ing? ${{ github.event.inputs.sed }}'
 
 on:
-  push:
-    branches: [ main ]
+  # push:
+  #   branches: [ main ]
   workflow_dispatch:
     inputs:
       sed:
