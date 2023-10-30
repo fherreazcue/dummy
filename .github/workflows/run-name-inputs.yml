@@ -1,9 +1,9 @@
 name: test-names
 run-name: |
   test-names:
-  'versioned'? ${{ github.event.inputs.versioned }}
-  'latest'? ${{ github.event.inputs.latest }}
-  'custom_tag': ${{ github.event.inputs.custom_tag }}
+  'versioned'? ${{ github.event.inputs.versioned }} - 
+  'latest'? ${{ github.event.inputs.latest }} - 
+  'custom_tag': ${{ github.event.inputs.custom_tag }} -
 
 on:
   workflow_dispatch:
